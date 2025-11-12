@@ -5,6 +5,7 @@ const decreaseTimer = document.querySelector('.decrease-timer');
 const startTimerBtn = document.querySelector('#start-btn');
 const stopTimerBtn = document.querySelector('#stop-btn');
 const resetTimerBtn = document.querySelector('#reset-btn');
+let timeInterval;
 
 increaseTimer.addEventListener('click', () => {
   time += 1;
@@ -35,7 +36,7 @@ function renderTime() {
 }
 
 function startTimer() {
-  const timeInterval = setInterval(() => {
+  timeInterval = setInterval(() => {
     if (time - 1 < 0) {
       clearInterval(timeInterval);
       alert('Timer ended');
@@ -46,6 +47,24 @@ function startTimer() {
   }, 1000);
 }
 
+function stopTimer() {
+  clearInterval(timeInterval);
+}
+
+function resetTimer() {
+  stopTimer();
+  time = 0;
+  renderTime();
+}
+
 startTimerBtn.addEventListener('click', () => {
   startTimer();
+});
+
+stopTimerBtn.addEventListener('click', () => {
+  stopTimer();
+});
+
+resetTimerBtn.addEventListener('click', () => {
+  resetTimer();
 });
