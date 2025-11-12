@@ -68,3 +68,12 @@ stopTimerBtn.addEventListener('click', () => {
 resetTimerBtn.addEventListener('click', () => {
   resetTimer();
 });
+
+// QUICK TIMERS
+document.querySelectorAll('.quick-timer').forEach((button) => {
+  button.addEventListener('click', () => {
+    const quickTime = Number(button.dataset.time);
+    time = quickTime;
+    renderTime();
+  });
+});
