@@ -7,6 +7,8 @@ const stopTimerBtn = document.querySelector('#stop-btn');
 const resetTimerBtn = document.querySelector('#reset-btn');
 let timeInterval;
 
+const alarmSound = document.querySelector('.alarm-sound');
+
 increaseTimer.addEventListener('click', () => {
   time += 1;
   renderTime();
@@ -39,7 +41,7 @@ function startTimer() {
   timeInterval = setInterval(() => {
     if (time - 1 < 0) {
       clearInterval(timeInterval);
-      alert('Timer ended');
+      alarmSound.play();
     } else {
       time -= 1;
       renderTime();

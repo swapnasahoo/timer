@@ -67,7 +67,7 @@ cd timer
 
 ## Future Enhancements
 
-- Sound notification instead of alert
+- Sound notification instead of alert [✅]
 - Multiple simultaneous timers
 - Timer history/log
 - Local storage to save timer settings
