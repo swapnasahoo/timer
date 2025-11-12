@@ -24,6 +24,18 @@ body {
   font-weight: bold;
 }
 
+.timer-container .time-setter button {
+  padding: 10px 24px;
+  margin: 0 5px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #444;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
 .timer-container .timer-controls button {
   padding: 10px 20px;
   margin: 10px;
