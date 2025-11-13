@@ -11,19 +11,7 @@ const alarmSound = document.querySelector('.alarm-sound');
 
 const timerDisplay = document.querySelector('.timer-display');
 
-timerDisplay.addEventListener('wheel', (e) => {
-  if (e.deltaY < 0) {
-    time += 1;
-    renderTime();
-  } else if (e.deltaY > 0) {
-    if (time - 1 < 0) {
-      time = 0;
-    } else {
-      time -= 1;
-      renderTime();
-    }
-  }
-});
+timerDisplay.addEventListener('wheel', updateTimeOnScroll);
 
 increaseTimer.addEventListener('click', () => {
   time += 1;
@@ -56,10 +44,11 @@ function renderTime() {
 function startTimer() {
   timeInterval = setInterval(() => {
     if (time - 1 < 0) {
-      clearInterval(timeInterval);
+      stopTimer();
       alarmSound.play();
     } else {
       time -= 1;
+      timerDisplay.removeEventListener('wheel', updateTimeOnScroll);
       renderTime();
     }
   }, 1000);
@@ -67,6 +56,7 @@ function startTimer() {
 
 function stopTimer() {
   clearInterval(timeInterval);
+  timerDisplay.addEventListener('wheel', updateTimeOnScroll);
 }
 
 function resetTimer() {
@@ -95,3 +85,18 @@ document.querySelectorAll('.quick-timer').forEach((button) => {
     renderTime();
   });
 });
+
+// SCROLL TO UPDATE TIME
+function updateTimeOnScroll(e) {
+  if (e.deltaY < 0) {
+    time += 1;
+    renderTime();
+  } else if (e.deltaY > 0) {
+    if (time - 1 < 0) {
+      time = 0;
+    } else {
+      time -= 1;
+      renderTime();
+    }
+  }
+}
