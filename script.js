@@ -9,6 +9,22 @@ let timeInterval;
 
 const alarmSound = document.querySelector('.alarm-sound');
 
+const timerDisplay = document.querySelector('.timer-display');
+
+timerDisplay.addEventListener('wheel', (e) => {
+  if (e.deltaY < 0) {
+    time += 1;
+    renderTime();
+  } else if (e.deltaY > 0) {
+    if (time - 1 < 0) {
+      time = 0;
+    } else {
+      time -= 1;
+      renderTime();
+    }
+  }
+});
+
 increaseTimer.addEventListener('click', () => {
   time += 1;
   renderTime();
@@ -34,7 +50,7 @@ function renderTime() {
     .toString()
     .padStart(2, '0');
 
-  document.querySelector('.timer-display').innerHTML = `${h}:${m}:${s}`;
+  timerDisplay.innerHTML = `${h}:${m}:${s}`;
 }
 
 function startTimer() {

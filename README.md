@@ -15,7 +15,7 @@ A simple, lightweight timer application built with vanilla HTML, CSS, and JavaSc
   - 10 minutes
   - 15 minutes
   - 20 minutes
-- **Alert Notification**: Get alerted when the timer reaches zero
+- **Sound Notification**: Plays a bundled audio file (located in `sounds/`) via an HTML `<audio>` element when the timer ends. Note: some browsers require a user interaction (e.g., clicking Start) before audio playback is allowed.
 - **Responsive Design**: Works seamlessly on desktop and mobile devices
 - **Dark Theme**: Eye-friendly dark interface
 
@@ -37,9 +37,11 @@ timer/
    - Or click a quick timer preset (5, 10, 15, or 20 minutes)
 3. **Run the Timer**: Click the **Start** button to begin the countdown
 4. **Manage Timer**:
-   - Click **Stop** to pause the timer
-   - Click **Reset** to return to 00:00:00
-5. **Alert**: When the timer reaches zero, an alert will notify you
+
+- Click **Stop** to pause the timer
+- Click **Reset** to return to 00:00:00
+
+5. **Sound Notification**: When the timer reaches zero, a bundled audio file will play via the page's `<audio>` element.
 
 ## Technologies Used
 
@@ -65,9 +67,9 @@ cd timer
 # Open index.html in your browser
 ```
 
-## Future Enhancements
+-## Future Enhancements
 
-- Sound notification instead of alert [✅]
+- Sound notification implemented (bundled audio file via `<audio>` element)
 - Multiple simultaneous timers
 - Timer history/log
 - Local storage to save timer settings
