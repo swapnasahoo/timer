@@ -22,6 +22,11 @@ body {
 .timer-container .timer-display {
   font-size: 5rem;
   font-weight: bold;
+  display: flex;
+}
+
+.timer-display p {
+  display: inline-block;
 }
 
 .timer-container .time-setter button {

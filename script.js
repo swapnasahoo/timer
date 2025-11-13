@@ -1,5 +1,6 @@
 let time = 0;
 
+// CONTROL ELEMENTS
 const increaseTimer = document.querySelector('.increase-timer');
 const decreaseTimer = document.querySelector('.decrease-timer');
 const startTimerBtn = document.querySelector('#start-btn');
@@ -9,9 +10,16 @@ let timeInterval;
 
 const alarmSound = document.querySelector('.alarm-sound');
 
+// DISPLAY ELEMENTS
 const timerDisplay = document.querySelector('.timer-display');
+const hoursDisplay = document.querySelector('.hours');
+const minutesDisplay = document.querySelector('.minutes');
+const secondsDisplay = document.querySelector('.seconds');
 
-timerDisplay.addEventListener('wheel', updateTimeOnScroll);
+// EVENT LISTENERS
+hoursDisplay.addEventListener('wheel', scrollHours);
+minutesDisplay.addEventListener('wheel', scrollMinutes);
+secondsDisplay.addEventListener('wheel', scrollSeconds);
 
 increaseTimer.addEventListener('click', () => {
   time += 1;
@@ -38,17 +46,21 @@ function renderTime() {
     .toString()
     .padStart(2, '0');
 
-  timerDisplay.innerHTML = `${h}:${m}:${s}`;
+  hoursDisplay.innerHTML = h;
+  minutesDisplay.innerHTML = m;
+  secondsDisplay.innerHTML = s;
 }
 
 function startTimer() {
   timeInterval = setInterval(() => {
-    if (time - 1 < 0) {
+    if (time <= 0) {
       stopTimer();
       alarmSound.play();
     } else {
       time -= 1;
-      timerDisplay.removeEventListener('wheel', updateTimeOnScroll);
+      hoursDisplay.removeEventListener('wheel', scrollHours);
+      minutesDisplay.removeEventListener('wheel', scrollMinutes);
+      secondsDisplay.removeEventListener('wheel', scrollSeconds);
       renderTime();
     }
   }, 1000);
@@ -56,7 +68,9 @@ function startTimer() {
 
 function stopTimer() {
   clearInterval(timeInterval);
-  timerDisplay.addEventListener('wheel', updateTimeOnScroll);
+  hoursDisplay.addEventListener('wheel', scrollHours);
+  minutesDisplay.addEventListener('wheel', scrollMinutes);
+  secondsDisplay.addEventListener('wheel', scrollSeconds);
 }
 
 function resetTimer() {
@@ -87,16 +101,28 @@ document.querySelectorAll('.quick-timer').forEach((button) => {
 });
 
 // SCROLL TO UPDATE TIME
-function updateTimeOnScroll(e) {
+function updateTimeOnScroll(e, timeInSeconds) {
   if (e.deltaY < 0) {
-    time += 1;
+    time += timeInSeconds;
     renderTime();
   } else if (e.deltaY > 0) {
     if (time - 1 < 0) {
       time = 0;
     } else {
-      time -= 1;
+      time -= timeInSeconds;
       renderTime();
     }
   }
+}
+
+function scrollHours(e) {
+  updateTimeOnScroll(e, 3600);
+}
+
+function scrollMinutes(e) {
+  updateTimeOnScroll(e, 60);
+}
+
+function scrollSeconds(e) {
+  updateTimeOnScroll(e, 1);
 }
